@@ -1,7 +1,5 @@
-> 解决 canvas 将图片转为 base64 报错: Uncaught DOMException: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported
+1、找出数组中和为定值的两个数(可含多组)——[代码](https://github.com/xuan45/blog/blob/master/%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%92%8C%E4%B8%BA%E5%AE%9A%E5%80%BC/main.cpp)
 
-受限于 CORS 策略，会存在跨域问题，虽然可以使用图像（比如 append 到页面上）但是绘制到画布上会污染画布，一旦一个画布被污染,就无法提取画布的数据，比如无法使用使用画布 toBlob(),toDataURL(),或 getImageData()方法;当使用这些方法的时候 会抛出一个安全错误
+2、爬虫遇到的数字乱码问题(特殊字体)——[问题链接](https://cnodejs.org/topic/5ad1bc783edb2aff6be8580f)
 
-```
-img.setAttribute("crossOrigin",'Anonymous')
-```
+3、递归下降分析，词法分析的简单实践，手动实现JSON语法的stringfiy和parse——[具体介绍](https://github.com/xuan45/blog/tree/master/Json)

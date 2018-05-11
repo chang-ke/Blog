@@ -39,4 +39,5 @@ int main() {
 	const auto sum = 7;
 	const auto length = sizeof(array) / sizeof(array[0]);
 	find(array, sum, length);
+	return 0;
 }

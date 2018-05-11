@@ -1,0 +1,12 @@
+{
+  "name": "CJSON",
+  "version": "0.0.1",
+  "description": "json解析",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node ./test/test.js"
+  },
+  "author": "邓斌",
+  "license": "MIT"
+}
