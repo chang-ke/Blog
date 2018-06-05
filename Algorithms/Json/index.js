@@ -3,7 +3,7 @@ function toString(t) {
 }
 
 function isNaN(t) {
-  return typeof t === 'number' && !t && t !== 0;
+  return t !== t;
 }
 
 function hasWhiteSpace(t) {
@@ -289,4 +289,4 @@ class CJSON {
   }
 }
 
-module.exports = CJSON
+module.exports = CJSON;
