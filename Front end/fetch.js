@@ -1,10 +1,24 @@
-function Fetch(options) {
-  let defaultOptions = {
-    method: 'GET'
-  };
+class TimeoutError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'TimeoutError';
+  }
+}
+
+function request(defaultOptions) {
+  let options = defaultOptions;
+  if (typeof options === 'string') {
+    options = {
+      url: defaultOptions,
+      method: 'GET',
+      timeout: 10000
+    };
+  }
+
   let parseJSON = response => {
     return response.json();
   };
+
   let checkStatus = response => {
     if (response.status >= 200 && response.status < 300) {
       return response;
@@ -14,71 +28,62 @@ function Fetch(options) {
     error.response = response;
     throw error;
   };
-  class _Fetch {
-    constructor({ timeout, ...options }) {
-      this.stack = [];
-      this.url = options.url;
-      this.timeout = timeout;
-      this.options = options;
-    }
 
-    timeout(timeout) {
-      this.timeout = timeout;
-      return this;
+  class Fetch {
+    constructor({ timeout, ...options }) {
+      this.url = options.url;
+      this.timeout = timeout || 10000;
+      this.options = options;
     }
 
     then(fn) {
       let success = false;
-      let startTime = new Date().getTime();
-      let isJSON = this.options.headers['Content-Type'].indexOf('json') > -1;
       setTimeout(() => {
-        let catchs = this.catch.bind(this);
         if (!success) {
-          success = true;
-          this.catch(new Error('timeout'));
-        } else {
-          console.log('请求已成功');
+          let error = new TimeoutError(`fetch timeout (${this.timeout / 1000}s)`);
+          this.catchError(error);
         }
       }, this.timeout);
-     
-      isJSON
-        ? fetch(this.url, this.options)
-            .then(checkStatus)
-            .then(parseJSON)
-            .then(res => {
-              let endTime = new Date().getTime();
-              if (endTime - startTime > this.timeout) {
-                if (!success) throw new Error('timeout');
-                success = true;
-              } else {
-                fn(res);
-                success = true;
-              }
-            })
-            .catch(err => {
-              this.catch(err);
-            })
-        : fetch(this.url, this.options)
-            .then(checkStatus)
-            .then(fn);
+      
+      fetch(this.url, this.options)
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(res => {
+          if (!success) {
+            fn(res);
+            success = true;
+          }
+        })
+        .catch(err => {
+          this.catchError(err);
+        });
+
       return this;
     }
+
     catch(fn) {
-      this.catch = fn;
+      this.catchError = fn;
     }
   }
 
-  return new _Fetch(options);
+  return new Promise((resolve, reject) => {
+    new Fetch(options)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 }
 
-Fetch({
+request({
   url: 'https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312',
   method: 'GET',
-  mode: 'cors',
   headers: {
     'Content-Type': 'application/json'
   },
-  timeout: 6600
+  timeout: 66
 })
   .then(res => {
     console.log(res);
@@ -86,3 +91,8 @@ Fetch({
   .catch(err => {
     console.log(err);
   });
+
+Promise.all([
+  request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312'),
+  request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312')
+]);
