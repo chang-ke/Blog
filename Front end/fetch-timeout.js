@@ -13,12 +13,16 @@ class TimeoutError extends Error {
 function request(defaultOptions) {
   let options = defaultOptions;
   let retryCount = 0;
+
   if (typeof options === 'string') {
     options = {
       url: defaultOptions,
       method: 'GET',
       timeout: 10000
     };
+  }
+  if (Object.prototype.toString.call(options) !== '[object Object]') {
+    throw new TypeError(`argument must be a string or object, but not a ${typeof options}`);
   }
 
   let parseJSON = response => {
@@ -35,7 +39,7 @@ function request(defaultOptions) {
     throw error;
   };
 
-  class Fetch {
+  class Request {
     constructor({ timeout, url, retry, ...options }) {
       this.url = url;
       this.retry = retry || 0;
@@ -79,15 +83,7 @@ function request(defaultOptions) {
     }
   }
 
-  return new Promise((resolve, reject) => {
-    new Fetch(options)
-      .then(res => {
-        resolve(res);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  return new Promise((resolve, reject) => new Request(options).then(res => resolve(res)).catch(err => reject(err)));
 }
 
 request({
