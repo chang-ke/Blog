@@ -4,26 +4,16 @@ class TimeoutError extends Error {
     this.name = 'TimeoutError';
   }
 }
+
 /**
  * 提供参数校验和wrapper功能
  *
- * @param {Object or String} defaultOptions
+ * @param {*} url
+ * @param {*} [options={ method: 'GET' }]
  * @returns {Promise} the request result
  */
-function request(defaultOptions) {
-  let options = defaultOptions;
+function request(url, options = { method: 'GET' }) {
   let retryCount = 0;
-
-  if (typeof options === 'string') {
-    options = {
-      url: defaultOptions,
-      method: 'GET',
-      timeout: 10000
-    };
-  }
-  if (Object.prototype.toString.call(options) !== '[object Object]') {
-    throw new TypeError(`argument must be a string or object, but not a ${typeof options}`);
-  }
 
   let parseJSON = response => {
     return response.json();
@@ -40,7 +30,7 @@ function request(defaultOptions) {
   };
 
   class Request {
-    constructor({ timeout, url, retry, ...options }) {
+    constructor(url, { timeout, retry, ...options }) {
       this.url = url;
       this.retry = retry || 0;
       this.timeout = timeout || 10000;
@@ -83,17 +73,18 @@ function request(defaultOptions) {
     }
   }
 
-  return new Promise((resolve, reject) => new Request(options).then(res => resolve(res)).catch(err => reject(err)));
+  return new Promise((resolve, reject) =>
+    new Request(url, options).then(res => resolve(res)).catch(err => reject(err))
+  );
 }
 
-request({
-  url: 'https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312',
+request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json'
   },
   retry: 2,
-  timeout: 660
+  timeout: 600
 })
   .then(res => console.log(res))
   .catch(err => console.log(err));

@@ -4,4 +4,4 @@
 
 3、递归下降分析，词法分析的简单实践，手动实现JSON语法的stringfiy和parse——[具体介绍](https://github.com/xuan45/Blog/tree/master/Algorithms/Json)
 
-4、对fetch超时功能的封装[代码](https://github.com/xuan45/Blog/tree/master/Front%20end/fetch.js)
+4、对fetch超时功能的封装[代码](https://github.com/xuan45/Blog/tree/master/Frontend/fetch-timeout.js)
