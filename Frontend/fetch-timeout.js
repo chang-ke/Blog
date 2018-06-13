@@ -30,7 +30,7 @@ function request(url, options = { method: 'GET' }) {
   };
 
   class Request {
-    constructor(url, { timeout, retry, ...options }) {
+    constructor(url, { retry, timeout, ...options }) {
       this.url = url;
       this.retry = retry || 0;
       this.timeout = timeout || 10000;
@@ -46,7 +46,7 @@ function request(url, options = { method: 'GET' }) {
           retryCount++;
           this.then(fn);
         } else {
-          let error = new TimeoutError(`fetch timeout (${this.timeout / 1000}s)`);
+          let error = new TimeoutError(`timeout of ${this.timeout}ms execeeded`);
           this.catchError(error);
         }
       }, this.timeout);
@@ -78,18 +78,14 @@ function request(url, options = { method: 'GET' }) {
   );
 }
 
-request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312', {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  },
+request('/api', {
   retry: 2,
-  timeout: 600
+  timeout: 1000
 })
   .then(res => console.log(res))
-  .catch(err => console.log(err));
+  // .catch(err => console.log(err));
 
-Promise.all([
-  request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312'),
-  request('https://cnodejs.org/api/v1/topic/5433d5e4e737cbe96dcef312')
-]).then(res => console.log(res));
+// Promise.all([
+//   request('api'),
+//   request('api')
+// ]).then(res => console.log(res));
