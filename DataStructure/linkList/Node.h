@@ -1,6 +1,3 @@
-#ifndef NODE_H
-#define NODE_H
-
 template <class T>
 struct Node
 {
@@ -20,4 +17,3 @@ Node<T>::Node(T e, Node<T> *link = NULL) {
 	data = e;
 	next = link;
 }
-#endif // !NODE_H
