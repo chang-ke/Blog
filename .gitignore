@@ -2,7 +2,7 @@
 
 /前端性能优化
 
-/Frontend/fetch-timeout
+/Frontend/lazy-load.html
 # misc
 .DS_Store
 npm-debug.log*
