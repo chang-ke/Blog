@@ -2,7 +2,11 @@
 
 /前端性能优化
 
-/Frontend/lazy-load.html
+
+/Frontend/loading.html
+
+/面试/test.js
+
 # misc
 .DS_Store
 npm-debug.log*
