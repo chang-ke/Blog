@@ -1,0 +1,1 @@
+pc 端通常有 slider 组件来模拟 input 的 range 组件以代替它，可通常使用鼠标 拖拽 thumb 时会触发 drag 事件，导致出现禁止图标，而此时模拟的拖拽事件结束标志：鼠标左键抬起 mouseup 事件不会被触发，导致当你实际上抬起鼠标左键时，mousemove 事件并未被取消，所以此时你需要监听 dragend 和 mouseup 事件以保证任何时候都能取消 mousemove 事件，另外需要考虑的是出现拖拽事件时，thumb 也能不能跟 mousemove 一样移动
