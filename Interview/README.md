@@ -9,6 +9,14 @@
   > 复杂数据类型 Object，Array，Function 则属于引用类型，存放在栈中
 - [x] 如何判断 js 数据类型
   > Object.prototype.toString.call
+  > object => [object Obejct]
+  > array => [object Array]
+  > number => [object Number]
+  > string => [object String]
+  > function => [object Function]
+  > symbol => [object Symbol]
+  > null => [object Null]
+  > undefined => [object Undefined]
 - [ ] js 作用域
 - [ ] js 继承
 - [ ] js 原型链
@@ -64,17 +72,19 @@
 
   > 我实现时使用了简陋的节流函数，如果线上使用可以用 loadash 等库里面的
 
-- [ ] [正则匹配一个邮箱 以及 匹配 http://www.sohu.com/ 中的主域名（?=即可）](./js/regx.js)
-- [ ] [正则表达式（字符串格式成金额（欧美，三个，）的）？](./js/regx.js)
+- [x] [正则匹配一个邮箱 以及 匹配 http://www.sohu.com/ 中的主域名（?=即可）](./js/regx.js)
+- [x] [正则表达式（字符串格式成金额（欧美，三个，）的）？](./js/regx.js)
 - [ ] 设计模式
+  > 推荐 JavaScript 设计模式和开发实践
+  > 能够手写常见的单例模式，发布订阅模式（观察者模式），工厂模式等等
 - [x] [微信群里见的一个阿里面试题，要求使用纯函数式方法计算 1000 以内能被 7 整除的所有奇数平方和。用 Promise 实现异步流式操作方法，比如方法 flow([a, b])就执行 a，再执行 b；比如 flow[a, [b, c], d]就执行 a,，同时执行 b, c，再执行 d，嵌套数组则定义为并行操作，嵌套只有一层](./js/flow.js)
 
 #### CSS 部分
 
 - [ ] margin 塌陷问题（BFC）
-- [ ] css 做一个进度条动画，进度条左右是带弧形的（不会）
+- [ ] css 做一个进度条动画，进度条左右是带弧形的
 
-- [ ] css 菱形，translate 的矩阵是怎么算的（没答好）
+- [ ] css 菱形，translate 的矩阵是怎么算的
 
 - [ ] flex 布局
 
@@ -108,18 +118,20 @@
 
 - [x] [判断是否存在循环引用](./algorithm/validate.js)
 
-- [ ] 从 1-n（自然序列）中选出一个数，然后打乱数组，找出这个缺失的数（求和）
+- [x] [从 1-n（自然序列）中选出一个数，然后打乱数组，找出这个缺失的数（求和）](./algorthm/findNum.ts)
 
 - [x] [bfs 和 dfs](./algorithm/dfs_bfs.js)
 
-- [ ] [快排（几乎必问）](../Algorithms/quickSort/QuickSort.cpp)
+- [x] [快排（几乎必问）](../Algorithms/quickSort/QuickSort.cpp)
+
+  > 不稳定算法，时间复杂度 O(nlogn)
 
 - [x] [一个函数，输入两个字符串，看两个字符串是不是切一刀反转的，是返回 true，不是返回 false，如 12345 和 34512 是 true](./algorithm/strJudge.js)
 
 - [x] [a^n 怎么用小于 O(n) 的算法实现 ( 快速幂算法 )](./algorithm/quickPow.js)
 
-- [x] [大数加法](./algorithm/bigNumber.js)
+- [x] [大数加法](./algorithm/bigNumber.ts)
 
   > 同时我也实现了乘法
 
-- [x] [Top K 算法](./algorithm/topk.js)
+- [x] [Top K 算法](./algorithm/topk.ts)
