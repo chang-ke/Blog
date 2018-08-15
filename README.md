@@ -8,6 +8,6 @@
 
 3、递归下降分析，词法分析的简单实践，手动实现 JSON 语法的 stringfiy 和 parse——[具体介绍](https://github.com/xuan45/Blog/tree/master/Algorithms/Json)
 
-4、对 fetch 超时功能的封装[代码](https://github.com/xuan45/Blog/tree/master/Frontend/fetch-timeout.js)
+4、对 fetch 超时功能的封装——[代码](https://github.com/xuan45/Blog/tree/master/Frontend/fetch-timeout.js)
 
-5、实现小红书图片瀑布流和懒加载[代码](https://github.com/xuan45/Blog/tree/master/Frontend/lazy-load.html)
+5、实现小红书图片瀑布流和懒加载——[代码](https://github.com/xuan45/Blog/tree/master/Frontend/lazy-load.html)

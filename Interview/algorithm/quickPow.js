@@ -13,15 +13,5 @@ function quickPow(a, b) {
   }
   return ans;
 }
-function pow(a, b) {
-  for (let i = 0; i < b; ++i) {
-    a *= b;
-  }
-  return a;
-}
-let a = new Date().getTime();
-console.log(quickPow(2, 1000));
-console.log(new Date().getTime() - a);
-a = new Date().getTime();
-pow(2, 1000);
-console.log(new Date().getTime() - a);
+
+console.log(quickPow(2, 10));
