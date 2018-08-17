@@ -1,7 +1,27 @@
-function inherit(func, pro) {
-  func.prototype = pro.prototype;
-  func.prototype.constructor = func;
-  return func;
+/**
+ *
+ *
+ * @param {function} pro
+ * @returns
+ */
+function inherit(pro) {
+  function f() {}
+  f.prototype = pro;
+  return new f();
+}
+
+function new_() {}
+/**
+ *
+ *
+ * @param {function} a
+ * @param {function} b
+ * @returns
+ */
+function extend(a, b) {
+  a.prototype = inherit(b.prototype);
+  a.prototype.constructor = a;
+  return a;
 }
 
 function A() {
@@ -15,5 +35,4 @@ function B() {
 
 B.prototype.c = function() {};
 
-inherit(A, B);
-console.log(new A());
+console.log(new B(), new extend(A, B)());

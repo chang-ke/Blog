@@ -5,27 +5,40 @@
 - [ ] 继承，原型链和构造函数，组合构造函数，寄生组合构造函数，代码实现
 
 - [x] js 基本数据类型
-  > Number, String, Null, Undefined, Boolean, Symbol 存放在堆中
-  > 复杂数据类型 Object，Array，Function 则属于引用类型，存放在栈中
+
+  > Number, String, Null, Undefined, Boolean, Symbol 存放在栈中
+
+  > 复杂数据类型 Object，Array，Function 则属于引用类型，存放在堆中
+
 - [x] 如何判断 js 数据类型
+
   > Object.prototype.toString.call
-  > object => [object Obejct]
-  > array => [object Array]
-  > number => [object Number]
-  > string => [object String]
-  > function => [object Function]
-  > symbol => [object Symbol]
-  > null => [object Null]
-  > undefined => [object Undefined]
+
+  - object => [object Obejct]
+
+  - array => [object Array]
+
+  - number => [object Number]
+
+  - string => [object String]
+
+  - function => [object Function]
+
+  - symbol => [object Symbol]
+
+  - null => [object Null]
+
+  - undefined => [object Undefined]
+
 - [ ] js 作用域
 - [ ] js 继承
 - [ ] js 原型链
-- [x] [ES6](./js/7.md)
+- [x] [ES6](./js/es6.md)
 
 - [ ] 浏览器缓存机制
 
 - [ ] 从输入一个 url 到显示页面？
-- [ ] 重排和重绘
+- [x] [重排和重绘](./js/RepaintAndReflow.md)
 
 - [ ] react 与 vue
 - [ ] redux
@@ -63,10 +76,10 @@
 
 - [x] 知道事件代理吗，为什么使用事件代理，target 和 currenttarget
 
-  > 提高性能
-  > target 是指绑定事件的对象，currentTarget 是指触发该事件的对象
+  > 提高性能, 动态绑定
+  > currentTarget 是指绑定事件的对象， target 是指触发该事件的对象
   > 比如说你在 ul 上绑定点击事件，当子元素 li 被点击时，由于事件冒泡，会触发 ul 的点击事件
-  > 于是 target 是 ul，currentTarget 是 li
+  > 于是 currentTarget 是 ul， target 是 li
 
 - [x] [实现图片懒加载](./js/lazy-load.html)
 
@@ -78,6 +91,31 @@
   > 推荐 JavaScript 设计模式和开发实践
   > 能够手写常见的单例模式，发布订阅模式（观察者模式），工厂模式等等
 - [x] [微信群里见的一个阿里面试题，要求使用纯函数式方法计算 1000 以内能被 7 整除的所有奇数平方和。用 Promise 实现异步流式操作方法，比如方法 flow([a, b])就执行 a，再执行 b；比如 flow[a, [b, c], d]就执行 a,，同时执行 b, c，再执行 d，嵌套数组则定义为并行操作，嵌套只有一层](./js/flow.js)
+- [x] 进程和线程的区别
+
+  - 线程是最小的执行单元，进程是最小的资源管理单元
+  - 一个线程只能属于一个进程，而一个进程可以有多个线程，且至少有一个
+
+- [ ] 闭包
+  > 闭包可以实现私有变量，但如果使用不当容易造成内存泄漏，所以一般使用完后需要切断变量的引用
+- [ ] 跨域及其解决方案
+
+- [ ] get post 区别
+
+- [x] 模块方面，ES6 和 CommonJS
+
+  > CommonJS 输出的是值的拷贝，ES6 是值的引用
+  > CommonJS 是运行时加载，而 ES6 是编译时确定的
+  > import React from 'React'，React 是只读的
+
+- [x] 模块加载 AMD，CMD， CommonJS
+  > 对于依赖的模块，AMD 是提前执行，而 CMD 是延迟执行
+  > CMD 推崇依赖就近，AMD 推崇依赖前置
+- [x] [封装 cookie](./js/cookie.js)
+
+- [ ] [Event Loop](./js/eventloop.md)
+
+- [ ] DOM 事件模型了解吗？了解的话知道 addEventListener 第三个参数作用是什么吗？
 
 #### CSS 部分
 

@@ -78,4 +78,4 @@ new BigNumber('999')
   .mul('1000001')
   .add('1')
   .valueOf();
-new BigNumber('999').add('1').valueOf();
+new BigNumber('999').add('1110').valueOf();
