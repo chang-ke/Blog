@@ -4,7 +4,7 @@
  * @param {string} b 切割后反转的字符串
  */
 
-function judge(a, b) {
+function judge(a: string, b: string) {
   for (let i = 0; i < a.length; ++i) {
     let origin = a.split('');
     if (origin[i] === b[0]) {

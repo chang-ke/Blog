@@ -120,7 +120,7 @@
 #### CSS 部分
 
 - [ ] margin 塌陷问题（BFC）
-- [ ] css 做一个进度条动画，进度条左右是带弧形的
+- [x] [css 做一个进度条动画，进度条左右是带弧形的](./css/loading.html)
 
 - [ ] css 菱形，translate 的矩阵是怎么算的
 
@@ -141,7 +141,7 @@
   > git merge –no-ff 可以保存你之前的分支历史。能够更好的查看 merge 历史，以及 branch 状态。
   > git merge 则不会显示 feature，只保留单条分支记录。
 
-#### HTTP 部分
+#### 计算机网络 部分
 
 - [ ] http 缓存 etag
       etag 怎么随机生成
@@ -151,25 +151,27 @@
 - [ ] http https 区别 https 具体解决了哪些问题？举个栗子？
 - [ ] tcp/udp 区别
 - [ ] tcp 三次握手
+- [ ] websocket
 
 #### 算法部分
 
 - [x] [判断是否存在循环引用](./algorithm/validate.js)
-
 - [x] [从 1-n（自然序列）中选出一个数，然后打乱数组，找出这个缺失的数（求和）](./algorthm/findNum.ts)
 
 - [x] [bfs 和 dfs](./algorithm/dfs_bfs.js)
 
 - [x] [快排（几乎必问）](../Algorithms/quickSort/QuickSort.cpp)
 
-  > 不稳定算法，时间复杂度 O(nlogn)
+  > 不稳定算法，时间复杂度 O(n * logn)
 
 - [x] [一个函数，输入两个字符串，看两个字符串是不是切一刀反转的，是返回 true，不是返回 false，如 12345 和 34512 是 true](./algorithm/strJudge.js)
 
 - [x] [a^n 怎么用小于 O(n) 的算法实现 ( 快速幂算法 )](./algorithm/quickPow.js)
-
+  > 时间复杂度O(logn)
 - [x] [大数加法](./algorithm/bigNumber.ts)
 
   > 同时我也实现了乘法
 
 - [x] [Top K 算法](./algorithm/topk.ts)
+  > 时间复杂度O(n * logm)为优
+- [x] [二叉树遍历(递归非递归实现？)]()
