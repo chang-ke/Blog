@@ -4,7 +4,7 @@
  * @param {string} email
  * @returns
  */
-function matchEmail(email) {
+function matchEmail(email: string) {
   return /^[^@]+@[^\.]+\.(com|cn)/.test(email);
 }
 
@@ -15,7 +15,7 @@ console.log(matchEmail('315764194@qq.com'));
  * @param {string} url
  * @returns
  */
-function matchDomain(url) {
+function matchDomain(url: string) {
   let match = url.match(/http(s)?:\/\/[\w\W]+\//);
   return match && match[0];
 }
@@ -27,7 +27,7 @@ console.log(matchDomain('https://taobao.com/home?price=6'));
  * @param {string} str
  * @returns
  */
-function formate(str) {
+function formate(str: string) {
   return str.replace(/(?!^)(?=(\d{3})+$)/g, ',');
 }
 

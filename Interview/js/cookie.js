@@ -41,8 +41,3 @@ class Cookie {
     if (this.get(name) !== null) this.set(name, '', {expires: -1});
   }
 }
-
-let cookie = new Cookie();
-cookie.set('test', 'value', {path: '/', expires: 365});
-console.log(cookie.get('test'));
-cookie.delete('test');

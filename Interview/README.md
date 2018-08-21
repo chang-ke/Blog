@@ -33,7 +33,7 @@
 - [ ] js 作用域
 - [ ] js 继承
 - [ ] js 原型链
-- [x] [ES6](./js/es6.md)
+- [x] [ES6 常用方法](./js/es6.md)
 
 - [ ] 浏览器缓存机制
 
@@ -64,9 +64,9 @@
 
   > 箭头函数 没有 this，arguments，super，也没有原型，不能被 new 调用，自动绑定父级作用域的 this
 
-- [ ] 哪些方法会改变原数组
+- [x] 哪些方法会改变原数组
 
-  > slice, splice 方法都可以对数组进行切割，且都返回切割的内容，唯一不同的是 splice 会改变原来的数组，此外 slice 也适用于对字符串进行操作
+  > shift(删除第一个) unshift(往开头添加) pop(删除最后一个) push(往末尾添加) reverse(反转) sort(排序) splice(删，改，替换)
 
 - [x] 深拷贝和浅拷贝
 
@@ -126,7 +126,7 @@
 
 - [ ] flex 布局
 
-- [x] 实现 4：3 的 div
+- [x] [实现 4：3 的 div](./css/4-3div.html)
   > padding-top 的百分比是相对于父元素宽度计算，所以可以把子元素的 padding-top 设置为 75%，高度设置为 0 即可。
 - [ ] css 定位 圣杯布局
 
@@ -162,16 +162,16 @@
 
 - [x] [快排（几乎必问）](../Algorithms/quickSort/QuickSort.cpp)
 
-  > 不稳定算法，时间复杂度 O(n * logn)
+  > 不稳定算法，时间复杂度 O(n \* logn)
 
 - [x] [一个函数，输入两个字符串，看两个字符串是不是切一刀反转的，是返回 true，不是返回 false，如 12345 和 34512 是 true](./algorithm/strJudge.js)
 
 - [x] [a^n 怎么用小于 O(n) 的算法实现 ( 快速幂算法 )](./algorithm/quickPow.js)
-  > 时间复杂度O(logn)
+  > 时间复杂度 O(logn)
 - [x] [大数加法](./algorithm/bigNumber.ts)
 
   > 同时我也实现了乘法
 
 - [x] [Top K 算法](./algorithm/topk.ts)
-  > 时间复杂度O(n * logm)为优
+  > 时间复杂度 O(n \* logm)为优
 - [x] [二叉树遍历(递归非递归实现？)]()

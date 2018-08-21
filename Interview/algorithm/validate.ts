@@ -4,10 +4,10 @@
  * @param {object} target 需要判断的对象
  * @returns
  */
-function validateCircularRefrence(target) {
+function validateCircularRefrence(target: Object) {
   const q = [];
-  /**保存访问当前节点的路径，并判断当前节点是否与路径上的节点相等 */
-  return (function dfs(origin) {
+  /**保存访问当前节点的路径，并判断当前节点是否与路径上的节点是否属于同一个实例 */
+  return (function dfs(origin: any) {
     if (!origin) return;
     for (let parent of q) {
       if (typeof origin === 'object' && parent === origin) {

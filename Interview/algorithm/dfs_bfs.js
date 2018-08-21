@@ -20,7 +20,7 @@ const tree = {
   data: 'A',
 };
 
-function visit(node) {
+function visit(node: Node) {
   console.log(node.data);
 }
 

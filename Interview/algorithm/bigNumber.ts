@@ -11,12 +11,25 @@ class BigNumber {
    * @memberof BigNumber
    */
   add(addend: string) {
-    const result = this.result;
+    function getDotIndex(number) {
+      let index = number.length - number.indexOf('.') - 1;
+      return index === number.length ? 0 : index;
+    }
+    let result = this.result;
+    const rIndex = getDotIndex(result);
+    const aIndex = getDotIndex(addend);
+    const dotLength = Math.max(rIndex, aIndex);
+    result = result.replace('.', '');
+    addend = addend.replace('.', '');
+    if (rIndex > aIndex) addend += '0'.repeat(rIndex - aIndex);
+
+    if (rIndex < aIndex) result += '0'.repeat(aIndex - rIndex);
+
     const maxLen = Math.max(result.length, addend.length);
     const minLen = Math.min(result.length, addend.length);
     const max = (result.length >= maxLen ? result : addend).split('').map(c => parseInt(c));
     const min = (result.length < maxLen ? result : addend).split('').map(c => parseInt(c));
-    const results = [0, ...max];
+    let results: any = [0, ...max];
     for (let i = 1; i <= maxLen; ++i) {
       let prev = maxLen - i;
       let curr = maxLen - i + 1;
@@ -28,7 +41,9 @@ class BigNumber {
         results[curr] = sum;
       }
     }
-    this.result = results.join('').replace(/^0*/, '');
+
+    if (dotLength !== 0) results.splice(results.length - dotLength, 0, '.');
+    this.result = results.join('').replace(/^(0*)/, '');
     return this;
   }
 
@@ -40,7 +55,19 @@ class BigNumber {
    * @memberof BigNumber
    */
   mul(multipiler: string) {
-    const result = this.result.split('').map(c => parseInt(c));
+    function getDotLength(result, multipiler) {
+      const rLen = result.length - result.indexOf('.') - 1;
+      const mLen = multipiler.length - multipiler.indexOf('.') - 1;
+      if (rLen === result.length && mLen === multipiler.length) return -1;
+      if (rLen === result.length) return mLen;
+      if (mLen === multipiler.length) return rLen;
+      return rLen + mLen;
+    }
+    let result: any = this.result;
+    const dotLength = getDotLength(result, multipiler);
+    result = result.replace('.', '');
+    multipiler = multipiler.replace('.', '');
+    result = result.split('').map(c => parseInt(c));
     const multi = multipiler.split('').map(c => parseInt(c));
     const totalLen = result.length + multi.length + 1;
     const resultLen = result.length;
@@ -49,8 +76,7 @@ class BigNumber {
      * typescript 不支持Array(length)后接fill(.fill().map(_=>0))方法...
      * 所以用下面的方法代替了
      */
-    const results = [...result, ...multi, 0].map(_ => 0);
-
+    const results: any = [...result, ...multi, 0].map(_ => 0);
     for (let i = 1; i <= resultLen; ++i) {
       for (let j = 1; j <= mulLen; ++j) {
         let sum = result[resultLen - i] * multi[mulLen - j];
@@ -64,7 +90,16 @@ class BigNumber {
         }
       }
     }
-    this.result = results.join('').replace(/^0*/, '');
+    if (dotLength > 0) {
+      results.splice(results.length - dotLength, 0, '.');
+      this.result = results
+        .join('')
+        .replace(/^0*/, '')
+        .replace(/\.0*$/, '');
+    } else {
+      this.result = results.join('').replace(/^0*/, '');
+    }
+
     return this;
   }
 
@@ -74,7 +109,7 @@ class BigNumber {
   }
 }
 
-new BigNumber('999')
+new BigNumber('0.999')
   .mul('1000001')
   .add('1')
   .valueOf();

@@ -29,12 +29,12 @@ class CJSON {
       f: '\f',
       n: '\n',
       r: '\r',
-      t: '\t'
+      t: '\t',
     };
   }
 
   error(msg) {
-    throw { name: 'SyntaxError', message: msg, at: this.at, html: this.html };
+    throw {name: 'SyntaxError', message: msg, at: this.at, html: this.html};
   }
 
   next(ch) {
@@ -104,8 +104,7 @@ class CJSON {
                 }
                 uffff = uffff * 16 + hex;
               }
-              console.log(uffff);
-              str += str.formCharCode(uffff);
+              str += String.fromCharCode(uffff);
             } else {
               if (typeof escapes[this.token] === 'string') {
                 str += escapes[this.token];
@@ -284,7 +283,7 @@ class CJSON {
             }
           }
           return reviver.call(holder, key, this.value);
-        })({ '': result }, '')
+        })({'': result}, '')
       : result;
   }
 }
