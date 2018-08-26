@@ -10,7 +10,7 @@
 <script>
     const wb = new WebSocket("ws://localhost:3000")
     wb.onopen = function () {
-        wb.send('client')
+        wb.send('1234567890'.repeat(10000))
     }
     wb.onmessage = function (e) {
         console.log('msg: ', e.data)
