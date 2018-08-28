@@ -26,7 +26,6 @@ public:
     Status DeleteElem(int i, T &e);
     Status InsertElem(int i, const T &e);
     Status InsertElem(const T &e);
-    DblLinkList(const DblLinkList<T> &dl);
     DblLinkList<T> &operator = (const DblLinkList<T> &dl);
 };
 template <class T>
@@ -168,5 +167,15 @@ void DblLinkList<T>::Clear() {
         delete ptr;
     }
 
+}
+
+template<class T>
+DblLinkList<T>&DblLinkList<T>::operator= (const DblLinkList<T> &dl) {
+    this->head = new DblNode<T>;
+    for (int i = 0; i < dl.length; ++i) {
+        T e;
+        dl.GetElem(i, e);
+        this->InsertElem(e);
+    }
 }
 #endif

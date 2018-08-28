@@ -2,7 +2,7 @@
 
 #### JS 部分
 
-- [ ] 继承，原型链和构造函数，组合构造函数，寄生组合构造函数，代码实现
+- [x] [继承，原型链和构造函数，组合构造函数，寄生组合构造函数](./js/inherit.ts)
 
 - [x] js 基本数据类型
 
@@ -37,7 +37,7 @@
 
 - [ ] 浏览器缓存机制
 
-- [ ] 从输入一个 url 到显示页面？
+- [x] [从输入一个 url 到显示页面？](https://dailc.github.io/2018/03/12/whenyouenteraurl.html)参考这篇博文，很全
 - [x] [重排和重绘](./js/RepaintAndReflow.md)
 
 - [ ] react 与 vue
@@ -117,6 +117,22 @@
 
 - [ ] DOM 事件模型了解吗？了解的话知道 addEventListener 第三个参数作用是什么吗？
 
+- [ ] 防抖和节流
+
+- [ ] 减层数组
+
+```js
+list: [1, 2, [3, 4], [5, 6, [7, 8], 9], 10, 11]
+
+depth = 1: [1, 2, 3, 4, 5, 6, [7, 8], 9, 10, 11]
+
+depth = 2: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+...
+
+function flatten (list, depth) {}
+```
+
 #### CSS 部分
 
 - [ ] margin 塌陷问题（BFC）
@@ -131,6 +147,8 @@
 - [ ] css 定位 圣杯布局
 
 - [ ] css 选择器，选择器优先级
+
+- [ ] 网络请求的图片宽高不定如何在给定区域内较好的显示，要防抖。
 
 #### 工具部分
 
@@ -149,13 +167,13 @@
 - [ ] http 协议
 - [ ] http 状态码
 - [ ] http https 区别 https 具体解决了哪些问题？举个栗子？
-- [ ] tcp/udp 区别
+- [ ] tcp/udp 区别, tcp 为什么可以实现可靠传输
 - [ ] tcp 三次握手
 - [ ] websocket
 
 #### 算法部分
 
-- [x] [判断是否存在循环引用](./algorithm/validate.js)
+- [x] [判断是否存在循环引用](./algorithm/validate.ts)
 - [x] [从 1-n（自然序列）中选出一个数，然后打乱数组，找出这个缺失的数（求和）](./algorthm/findNum.ts)
 
 - [x] [bfs 和 dfs](./algorithm/dfs_bfs.js)
@@ -164,9 +182,9 @@
 
   > 不稳定算法，时间复杂度 O(n \* logn)
 
-- [x] [一个函数，输入两个字符串，看两个字符串是不是切一刀反转的，是返回 true，不是返回 false，如 12345 和 34512 是 true](./algorithm/strJudge.js)
+- [x] [一个函数，输入两个字符串，看两个字符串是不是切一刀反转的，是返回 true，不是返回 false，如 12345 和 34512 是 true](./algorithm/strJudge.ts)
 
-- [x] [a^n 怎么用小于 O(n) 的算法实现 ( 快速幂算法 )](./algorithm/quickPow.js)
+- [x] [a^n 怎么用小于 O(n) 的算法实现 ( 快速幂算法 )](./algorithm/quickPow.ts)
   > 时间复杂度 O(logn)
 - [x] [大数加法](./algorithm/bigNumber.ts)
 
@@ -175,3 +193,5 @@
 - [x] [Top K 算法](./algorithm/topk.ts)
   > 时间复杂度 O(n \* logm)为优
 - [x] [二叉树遍历(递归非递归实现？)]()
+
+- [x] [KMP 算法](../Algorithms/KMP.cpp)
