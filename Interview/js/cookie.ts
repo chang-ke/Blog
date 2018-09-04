@@ -7,10 +7,10 @@ class Cookie {
    * @param {object} opts
    * @memberof Cookie
    */
-  set(name, value, {expires = 1, domain, path}) {
+  set(name: string, value: any, {expires = 1, domain = null, path = null}) {
     const exp = new Date();
     exp.setTime(exp.getTime() + expires * 24 * 60 * 60 * 1000);
-    let cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
+    let cookie = name + '=' + escape(value) + ';expires=' + exp.toUTCString();
     if (domain) {
       cookie += ';domain=' + domain;
     }
@@ -26,7 +26,7 @@ class Cookie {
    * @returns value
    * @memberof Cookie
    */
-  get(name) {
+  get(name: string) {
     const result = document.cookie.match(new RegExp(name + '=[^;]+'));
     if (result) return result[0].split('=')[1];
     else return null;
@@ -37,7 +37,7 @@ class Cookie {
    * @param {string} name
    * @memberof Cookie
    */
-  delete(name) {
+  delete(name: string) {
     if (this.get(name) !== null) this.set(name, '', {expires: -1});
   }
 }
