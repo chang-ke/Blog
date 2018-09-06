@@ -174,6 +174,7 @@ function flatten (list, depth) {}
 #### 算法部分
 
 - [x] [判断是否存在循环引用](./algorithm/validate.ts)
+
 - [x] [从 1-n（自然序列）中选出一个数，然后打乱数组，找出这个缺失的数（求和）](./algorthm/findNum.ts)
 
 - [x] [bfs 和 dfs](./algorithm/dfs_bfs.js)
@@ -195,3 +196,5 @@ function flatten (list, depth) {}
 - [x] [二叉树遍历(递归非递归实现？)]()
 
 - [x] [KMP 算法](../Algorithms/KMP.cpp)
+
+- [x] [单链表反转](../Algorithms/reverse/main.cpp)
