@@ -138,7 +138,7 @@ function flatten (list, depth) {}
 - [ ] margin 塌陷问题（BFC）
 - [x] [css 做一个进度条动画，进度条左右是带弧形的](./css/loading.html)
 
-- [ ] css 菱形，translate 的矩阵是怎么算的
+- [ ] css 菱形
 
 - [ ] flex 布局
 
@@ -147,8 +147,6 @@ function flatten (list, depth) {}
 - [ ] css 定位 圣杯布局
 
 - [ ] css 选择器，选择器优先级
-
-- [ ] 网络请求的图片宽高不定如何在给定区域内较好的显示，要防抖。
 
 #### 工具部分
 
@@ -198,3 +196,7 @@ function flatten (list, depth) {}
 - [x] [KMP 算法](../Algorithms/KMP.cpp)
 
 - [x] [单链表反转](../Algorithms/reverse/main.cpp)
+
+- [x] [两个有序数组，合并成一个有序数组？例如把这两个数组[1,3,5,7,9],[2,4,6,8,10]合并成[1,2,3,4,5,6,7,8,9,10]](./js/merge.ts)
+
+- [x] [[1,2,[3,4],[5,6],{a: 7}] 变成[1,2,3,4,5,6,7] 和上面一样，会嵌套很多层](./js/flatten.ts)

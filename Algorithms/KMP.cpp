@@ -18,13 +18,14 @@ int calc_next(const string &pat, int *next) {
     }
     return 0;
 }
-int KMP(const string &str, const string &pat, int p = 0) {
+
+int KMP(const string &str, const string &pat, int start = 0) {
     int k = 0;
     int strlen = (int)str.length();
     int patlen = (int)pat.length();
     int *next = new int[patlen];
     calc_next(pat, next);
-    for (int i = p; i < strlen; ++i) {
+    for (int i = start; i < strlen; ++i) {
         while (k > 0 && pat[k] != str[i]) {
             k = next[k - 1];
         }
@@ -38,4 +39,7 @@ int KMP(const string &str, const string &pat, int p = 0) {
     return -1;
 }
 
-
+int main() {
+    cout << KMP("afcasasfgasfasassasf", "asf", 1);
+    return 0;
+}
