@@ -1,9 +1,9 @@
 class MinHeap {
   k: number;
-  arr: Array<number>;
+  array: Array<number>;
   constructor(k) {
     this.k = k;
-    this.arr = [];
+    this.array = [];
   }
   /**
    *
@@ -12,14 +12,14 @@ class MinHeap {
    * @memberof MinHeap
    */
   push(val: number) {
-    const {arr, k} = this;
-    if (arr.length < k) {
-      arr[arr.length] = val;
-      for (let i = arr.length - 1; arr[i] < arr[Math.floor(i / 2)]; i /= 2) {
-        [arr[Math.floor(i / 2)], arr[i]] = [arr[i], arr[Math.floor(i / 2)]];
+    const {array, k} = this;
+    if (array.length < k) {
+      array[array.length] = val;
+      for (let i = array.length - 1; array[i] < array[Math.floor(i / 2)]; i /= 2) {
+        [array[Math.floor(i / 2)], array[i]] = [array[i], array[Math.floor(i / 2)]];
       }
-    } else if (val > arr[0]) {
-      arr[0] = val;
+    } else if (val > array[0]) {
+      array[0] = val;
       for (let i = 0; i < k; ) {
         const left = 2 * i + 1;
         const right = 2 * i + 2;
@@ -27,21 +27,21 @@ class MinHeap {
         /**
          * 均大于子节点，选取较小的交换
          */
-        if (val > arr[left] && val > arr[right]) {
-          if (arr[left] > arr[right]) {
-            [arr[i], arr[right]] = [arr[right], arr[i]];
+        if (val > array[left] && val > array[right]) {
+          if (array[left] > array[right]) {
+            [array[i], array[right]] = [array[right], array[i]];
             i = right;
           }
-          if (arr[left] < arr[right]) {
-            [arr[i], arr[left]] = [arr[left], arr[i]];
+          if (array[left] < array[right]) {
+            [array[i], array[left]] = [array[left], array[i]];
             i = left;
           }
         } else {
-          if (val > arr[left]) {
-            [arr[i], arr[left]] = [arr[left], arr[i]];
+          if (val > array[left]) {
+            [array[i], array[left]] = [array[left], array[i]];
             i = left;
-          } else if (val > arr[right]) {
-            [arr[i], arr[right]] = [arr[right], arr[i]];
+          } else if (val > array[right]) {
+            [array[i], array[right]] = [array[right], array[i]];
             i = right;
           } else {
             break; // 比它的两个子元素都要小
@@ -51,13 +51,13 @@ class MinHeap {
     }
   }
   getTop() {
-    return this.arr[0];
+    return this.array[0];
   }
 }
 
-function topK(arr: Array<number>, k: number) {
+function topK(array: Array<number>, k: number) {
   const m = new MinHeap(k);
-  arr.forEach(v => m.push(v));
+  array.forEach(v => m.push(v));
   console.log(m);
   return m.getTop();
 }

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "rootDir": "/",
+    "removeComments": true,
+    "strictNullChecks": true
+  },
+  "compileOnSave": true,
+  "include": ["./*.ts"]
+}

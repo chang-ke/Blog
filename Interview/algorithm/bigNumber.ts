@@ -72,11 +72,7 @@ class BigNumber {
     const totalLen = result.length + multi.length + 1;
     const resultLen = result.length;
     const mulLen = multi.length;
-    /**
-     * typescript 不支持Array(length)后接fill(.fill().map(_=>0))方法...
-     * 所以用下面的方法代替了
-     */
-    const results: any = [...result, ...multi, 0].map(_ => 0);
+    const results: any = Array(totalLen).fill(0);
     for (let i = 1; i <= resultLen; ++i) {
       for (let j = 1; j <= mulLen; ++j) {
         let sum = result[resultLen - i] * multi[mulLen - j];
