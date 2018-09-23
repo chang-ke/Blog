@@ -1,4 +1,4 @@
-### es6 常用方法
+### es6 或更新版本的 常用方法
 
 #### 我能想起常用的大概就是下面的了
 
@@ -186,4 +186,22 @@ document.addEventListener('click', () => {
 [].slice.call(arguments);
 // es6
 Array.from(arguments);
+```
+
+#### 对象属性简写
+
+```js
+const name = 'tom';
+
+const person = {name};
+```
+
+#### 对象属性函数简写
+
+```js
+const person = {
+  say() {
+    console.log('hello');
+  },
+};
 ```
