@@ -31,8 +31,33 @@
   - undefined => [object Undefined]
 
 - [ ] js 作用域
+  > es6 之前作用域只有函数作用域，es6 之后作用域增加了此法作用域，使用 let 或者 const
 - [ ] js 继承
 - [ ] js 原型链
+
+  ```js
+  原型就是指函数的prototype属性
+  假设有四个函数 A、B、C、D
+  A.prototype = B;
+  B.prototype = C;
+  C.prototype = D;
+  D.prototype.say = function() {
+    console.log('I am located at the prototype of D');
+  };
+  B.prototype.fly = function() {
+    console.log('I am located at the prototype of B, I can fly');
+  };
+  A.say(); // I am located at the prototype of D
+  A.fly(); // I am located at the prototype of B, I can fly
+  D.fly(); // Uncaught TypeError: D.fly is not a function
+
+  为什么会出现这样的情况呢，这就跟原型链有关了。
+  当你试图访问一个对象的属性时，它本身没有该属性时，它会尝试着去原型上找，如果找不到，那就往原型的原型上找，直到最上层原型没有原型为止，其实这里就到了内建Object 对象了
+
+  Object对象几乎是所有高级类型的顶层原型。
+  为什么说几乎呢，因为你可以手动设置对象的原型为null或者为没有对象的原型 Object.create(null);
+  ```
+
 - [x] [ES6 常用方法](./js/es6.md)
 
 - [ ] 浏览器缓存机制
@@ -52,8 +77,7 @@
   > 1vw 等于视窗宽度的 1%
   > 兼容性：移动端 Android 4.4 和 iOS8 及以上，PC 端 IE10 及以上支持
 
-- [ ] sessionStorage 和 localStorage 的区别
-      如果关闭一个标签页 它的 sessionStorage 还有吗 那它什么时候清除
+- [ ] sessionStorage 和 localStorage 的区别，如果关闭一个标签页 它的 sessionStorage 还有吗 那它什么时候清除
 
 - [ ] 前端性能优化的方案
       首屏加载怎么优化
@@ -72,7 +96,7 @@
 
   > 浅拷贝只复制第一层，...和 Object.assgin 均可实现，深拷贝需要递归拷贝每一项
 
-- [ ] call，apply，bind 的区别，作用
+- [x] [call，apply，bind 的区别，作用](./js/call-apply-bind.md)
 
 - [x] 知道事件代理吗，为什么使用事件代理，target 和 currenttarget
 
@@ -87,7 +111,7 @@
 
 - [x] [正则匹配一个邮箱 以及 匹配 http://www.sohu.com/ 中的主域名（?=即可）](./js/regx.js)
 - [x] [正则表达式（字符串格式成金额（欧美，三个，）的）？](./js/regx.js)
-- [ ] 设计模式
+- [ ] [设计模式](./js/design-patterns.md)
   > 推荐 JavaScript 设计模式和开发实践
   > 能够手写常见的单例模式，发布订阅模式（观察者模式），工厂模式等等
 - [x] [微信群里见的一个阿里面试题，要求使用纯函数式方法计算 1000 以内能被 7 整除的所有奇数平方和。用 Promise 实现异步流式操作方法，比如方法 flow([a, b])就执行 a，再执行 b；比如 flow[a, [b, c], d]就执行 a,，同时执行 b, c，再执行 d，嵌套数组则定义为并行操作，嵌套只有一层](./js/flow.js)
@@ -113,7 +137,7 @@
   > CMD 推崇依赖就近，AMD 推崇依赖前置
 - [x] [封装 cookie](./js/cookie.js)
 
-- [ ] [Event Loop](./js/eventloop.md)
+- [x] [Event Loop](./js/eventloop.md)
 
 - [ ] DOM 事件模型了解吗？了解的话知道 addEventListener 第三个参数作用是什么吗？
 
@@ -136,11 +160,14 @@ function flatten (list, depth) {}
 #### CSS 部分
 
 - [ ] margin 塌陷问题（BFC）
+
 - [x] [css 做一个进度条动画，进度条左右是带弧形的](./css/loading.html)
 
 - [ ] css 菱形
 
-- [ ] flex 布局
+- [x] flex 布局
+
+  > 推荐阮老师的教程
 
 - [x] [实现 4：3 的 div](./css/4-3div.html)
   > padding-top 的百分比是相对于父元素宽度计算，所以可以把子元素的 padding-top 设置为 75%，高度设置为 0 即可。
