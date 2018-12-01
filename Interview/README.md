@@ -30,8 +30,12 @@
 
   - undefined => [object Undefined]
 
-- [ ] js 作用域
-  > es6 之前作用域只有函数作用域，es6 之后作用域增加了此法作用域，使用 let 或者 const
+  - Date => [object Date]
+
+  - RegExp => [object RegExp]
+
+- [x] js 作用域
+  > es6 之前作用域只有函数作用域，es6 之后作用域增加了词法作用域，使用 let 或者 const
 - [ ] js 继承
 - [ ] js 原型链
 
@@ -77,10 +81,14 @@
   > 1vw 等于视窗宽度的 1%
   > 兼容性：移动端 Android 4.4 和 iOS8 及以上，PC 端 IE10 及以上支持
 
-- [ ] sessionStorage 和 localStorage 的区别，如果关闭一个标签页 它的 sessionStorage 还有吗 那它什么时候清除
+- [x] sessionStorage 和 localStorage 的区别，如果关闭一个标签页 它的 sessionStorage 还有吗 那它什么时候清除
+由下表可知，关闭标签页sessionStorage后没了
+ | 特性 | sessionStorage | localStorage |
+ | :----------- | :------------------------- | :--------------------- |
+| 数据生命周期 | 用户主动清除，否则永久存在 | 关闭页面或者浏览器清除 |
+| 存放数据大小 | 一般为 5MB | 一般为 5MB |
 
-- [ ] 前端性能优化的方案
-      首屏加载怎么优化
+- [ ] 前端性能优化的方案 首屏加载怎么优化
 
 - [x] 有个应用场景，你在淘宝登录之后请求到天猫页面（不同子域），登录状态是保留的，如何实现的
   > 将登录状态保存在 cookie，并将 domain 设置为顶级域名
@@ -125,6 +133,7 @@
 - [ ] 跨域及其解决方案
 
 - [ ] get post 区别
+      说实话，在当初
 
 - [x] 模块方面，ES6 和 CommonJS
 
@@ -157,6 +166,15 @@ depth = 2: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 function flatten (list, depth) {}
 ```
 
+- [ ] 请用正则从 2018-10-07T11:48:47 Asia/zh-cn 提取结果['2018','10','07','11','48','47']
+
+  > "2018-10-07T11:48:47 Asia/zh-cn".match(/\d{4}|\d{2}/g) 感觉好奇怪。。。
+
+- [ ] 已知如下对象，请基于 es6 中的 Proxy 方法设计一个属性拦截读取操作的例子，要求实现当访问目标对象 example 中不存在的属性时，抛出错误：
+      Propertry `${property}` does not exist.
+      `js const man={ name: 'jscoder',age:22 } const proxy = new Proxy(man); proxy.name // jscoder proxy.location // Propertry location does not exist.`
+- [ ] 渲染虚拟 DOM 成真实 DOM
+
 #### CSS 部分
 
 - [ ] margin 塌陷问题（BFC）
@@ -174,6 +192,8 @@ function flatten (list, depth) {}
 - [ ] css 定位 圣杯布局
 
 - [ ] css 选择器，选择器优先级
+- [ ] css 特性中的 transform：translateZ(0)是什么作用？
+  > 主要是开启动画 gpu 渲染，提高动画流畅性
 
 #### 工具部分
 
