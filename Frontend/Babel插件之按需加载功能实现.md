@@ -1,12 +1,3 @@
----
-title: Babel插件之按需加载功能实现
-date: 2018-11-30 22:36:29
-tags:
-  - babel
-  - javascript
-categories:
-  - Babel
----
 虽然文章标题讲的是按需加载，但是后来我又加上了箭头函数转普通函数和let、const转var的代码
 
 ### Note: 
@@ -172,6 +163,8 @@ import from "antd/lib/table/style/index.css";
 - .babelrc可以添加你的插件以及配置参数
 - 插件编写必须遵循规范
 - 当你相改变某个节点时，使用该节点名（首字母大写）称作为函数名进行访问，使用path.replaceWith或者repalceWithMultiple替换
+
+如果你觉得我讲的还不错的话，欢迎watch，star，fork一条龙 (\*/ω\\*)
 
 ### 参考资料：
 babel-types: [官网](https://babeljs.io/docs/en/next/babel-types.html)

@@ -12,4 +12,4 @@
 
 5、实现小红书图片瀑布流和懒加载——[代码](./Interview/js/lazy-load.html)
 
-6、Babel插件之按需加载功能实现——[文章](./Frontend/babel插件之按需加载功能实现.md)
+6、Babel插件之按需加载功能实现——[文章](./Frontend/Babel插件之按需加载功能实现.md)
