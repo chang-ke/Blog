@@ -11,3 +11,5 @@
 4、对 fetch 超时功能的封装——[代码](./Frontend/fetch-timeout/fetch-timeout.js)
 
 5、实现小红书图片瀑布流和懒加载——[代码](./Interview/js/lazy-load.html)
+
+6、Babel插件之按需加载功能实现——[文章](./Frontend/babel插件之按需加载功能实现.md)
