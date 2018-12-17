@@ -83,8 +83,9 @@
 
 - [x] sessionStorage 和 localStorage 的区别，如果关闭一个标签页 它的 sessionStorage 还有吗 那它什么时候清除
 由下表可知，关闭标签页sessionStorage后没了
- | 特性 | sessionStorage | localStorage |
- | :----------- | :------------------------- | :--------------------- |
+
+| 特性 | sessionStorage | localStorage |
+| :----------- | :------------------------- | :--------------------- |
 | 数据生命周期 | 用户主动清除，否则永久存在 | 关闭页面或者浏览器清除 |
 | 存放数据大小 | 一般为 5MB | 一般为 5MB |
 
