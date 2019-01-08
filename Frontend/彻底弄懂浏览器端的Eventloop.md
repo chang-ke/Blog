@@ -1,15 +1,13 @@
-
-
 ## 前言
 
 > 写这篇文章的起因是在群里看到了各位再讨论这部分的内容，这一块自己也不太懂，一时手痒就写了这篇文章这一块很多初学者也是一知半懂，学到一半发现又麻烦又复杂，索性放弃了。
-本来打算考完操作系统就写完的，结果又遇到了CPU课设...所以这篇文章断断续续写了很多天
+> 本来打算考完操作系统就写完的，结果又遇到了 CPU 课设...所以这篇文章断断续续写了很多天
 
-----
+---
 
 ## Event Loop
 
-简单点讲 event loop 就是对JS代码执行顺序的一个规定（任务调度算法）
+简单点讲 event loop 就是对 JS 代码执行顺序的一个规定（任务调度算法）
 
 先看看两幅图
 
@@ -30,12 +28,13 @@
 </div>
 
 NOTE：
+
 > 一个 web worker 或者一个跨域的 iframe 都有自己的栈，堆和消息队列。两个不同的运行时只能通过 postMessage 方法进行通信。如果另一运行时侦听 message 事件，则此方法会向其添加消息。
 
 **HTML Eventloop**
 
 > via: https://livebook.manning.com/#!/book/secrets-of-the-javascript-ninja-second-edition/chapter-13/
-这幅图就是对whatwg组织制定HTML规范中的event loop的可视化
+> 这幅图就是对 whatwg 组织制定 HTML 规范中的 event loop 的可视化
 
 <div align=center>
   <img src="
@@ -59,7 +58,7 @@ console.log(3); // 非异步代码
 
 一般分为两种任务，macroTasks 和 microTasks
 
-event loop 里面有维护了两个不同的异步任务队列 macroTasks(Tasks) 的队列microTasks 的队列
+event loop 里面有维护了两个不同的异步任务队列 macroTasks(Tasks) 的队列 microTasks 的队列
 
 - 宏任务包括：setTimeout, setInterval, setImmediate, I/O, UI rendering
 
@@ -73,13 +72,26 @@ event loop 里面有维护了两个不同的异步任务队列 macroTasks(Tasks)
 
 3、microTasks 清空队列执行，若有任务不可执行，推入下一轮 microTasks
 
-4、检查 microTasks 是否清空，若有则跳到 2，无则跳到 3
+4、结束 event-loop
 
-5、结束 event-loop
+值得一提的是，在 HTML 标准中提到了一个 compound microtasks 当它执行时可能会去执行一个 subTask，执行 compound microTasks 是一件很复杂的事情，在 whatwg 我也没找到这部分具体的执行流程
 
-浏览器执行代码的真正过程是下面整个流程，而我们编写代码感知的过程是红框里面的（**所以以后要是有人再问起你macroTask和microTask哪个先执行，可别再说microTask了**）
+```js
+const p = Promise.resolve();
+p.then(() => {
+  Promise.resolve().then(() => {
+    console.log('subTask');
+  });
+}).then(() => {
+  console.log('compound microTasks');
+});
+// subTask
+// compound microTasks
+```
 
-值得一提的是，在HTML标准中提到了一个 compound microtasks 当它执行时可能会去执行一个subTask
+按理说 p 的两个 then 先执行，在执行 then 函数回调的时候又发现了 microTask，那应该是下一轮 eventLoop 执行了，但是结果确是相反的
+
+**浏览器执行代码的真正过程是下面整个流程，而我们编写代码感知的过程是红框里面的（所以以后要是有人再问起你 macroTask 和 microTask 哪个先执行，可别再说 microTask 了）**
 
 <div align=center>
   <img src="https://user-gold-cdn.xitu.io/2019/1/5/1681c766b471b172?w=913&h=712&f=png&s=31274"/>
@@ -122,10 +134,9 @@ p.then(r => console.log(r));
 
 > 函数名后面的数字或者变量，是这个函数打印的东西，借此区分函数
 
-扫描完这些代码，各任务队列的情况如下图（注意此时由浏览器提供的setTimeout会检查各定时任务是否到时间，如果到了则推入任务队列，所以此时定时1000ms的回调函数并未出现在macroTask中）
+扫描完这些代码，各任务队列的情况如下图（注意此时由浏览器提供的 setTimeout 会检查各定时任务是否到时间，如果到了则推入任务队列，所以此时定时 1000ms 的回调函数并未出现在 macroTask 中）
 然后执行完同步代码，开始按上面介绍的情况开始执行 macro Task 和 micro Task
 ![](https://user-gold-cdn.xitu.io/2019/1/5/1681c76a3c6bffcb?w=737&h=497&f=png&s=22910)
-
 
 先执行 micro Task，拿出 p.then p1 发现可执行，打印 p1；然后拿出 p.then p 发现不可执行，即 status 为“pending”, 这一轮 micro Task 执行完毕
 开始执行 macro Task，拿出 setTimeout 123，发现可执行（此时同步代码已执行完毕），打印 123，检查执行 micro Task， p.then p 依旧不可执行
@@ -142,7 +153,6 @@ p1
 p
 ```
 
-
 你有做对吗，这只是小 case，还没加上 async 函数呢，接下来看看 async 函数
 
 ## async/await
@@ -155,7 +165,7 @@ An async function can contain an await expression that pauses the execution of t
 
 翻译过来就是 async 函数可以包含一个 await 表达式，该表达式暂停执行 async 函数并等待返回的 Promise resovle/reject 完成，然后恢复 async 函数的执行并返回已解析的值
 
-看完你应该知道为啥 await 表达式会让 async 函数让出线程了吧？(如果不让出线程，还不如写同步代码了，阻塞后面所有代码), 结合前面的 Event Loop，可以确定，await 表达式需要等待 Promise 解析完成，await 恢复 async 函数执行需要等待执行完第一轮微任务以后，毕竟不是每个async函数都是直接返回一个非Promise的值或者立即解析的Promise，所以等mainline JS执行完还需要等待一轮event loop
+看完你应该知道为啥 await 表达式会让 async 函数让出线程了吧？(如果不让出线程，还不如写同步代码了，阻塞后面所有代码), 结合前面的 Event Loop，可以确定，await 表达式需要等待 Promise 解析完成，await 恢复 async 函数执行需要等待执行完第一轮微任务以后，毕竟不是每个 async 函数都是直接返回一个非 Promise 的值或者立即解析的 Promise，所以等 mainline JS 执行完还需要等待一轮 event loop
 
 ##### await 阻塞什么代码的执行
 
@@ -212,32 +222,35 @@ setTimeout(() => {
 
 ## 总结
 
-- #### macroTask和microTask哪个先执行
+- #### macroTask 和 microTask 哪个先执行
 
-macroTask先执行（毕竟标准就是这么定的），至于为什么，我个人认为是因为macroTask都是和用户交互有关的事件，所以需要及时响应
+macroTask 先执行（毕竟标准就是这么定的），至于为什么，我个人认为是因为 macroTask 都是和用户交互有关的事件，所以需要及时响应
 
 - #### async 函数做了什么
-async函数里面可以使用await表达式，async函数的返回值会被Promise.resolve包裹(返回值是一个Promise对象就直接返回该对象)
+  async 函数里面可以使用 await 表达式，async 函数的返回值会被 Promise.resolve 包裹(返回值是一个 Promise 对象就直接返回该对象)
+
 ```js
 // 验证
 const p = new Promise(resolve => resolve());
-console.log(p === Promise.resolve(p)) // true
+console.log(p === Promise.resolve(p)); // true
 ```
+
 - #### await 语句做了什么
 
-await 语句会先执行其后面的表达式，(如果该表达式是函数且该函数里面遇到await，则会按同样的套路执行)，然后阻塞属于当前 async 函数作用域下后面的代码
+await 语句会先执行其后面的表达式，(如果该表达式是函数且该函数里面遇到 await，则会按同样的套路执行)，然后阻塞属于当前 async 函数作用域下后面的代码
 
 - #### 什么时候恢复 await 语句后面代码的执行
 
-当执行完 await 语句之后的 某一轮 eventloop 结束后恢复执行（它需要等待它右侧的返回的Promise解析完成，而Promise解析可能是同步的（new Promise），也可能是异步的（.then），而then回调需要等到eventloop最后去执行）
+当执行完 await 语句之后的 某一轮 eventloop 结束后恢复执行（它需要等待它右侧的返回的 Promise 解析完成，而 Promise 解析可能是同步的（new Promise），也可能是异步的（.then），而 then 回调需要等到 eventloop 最后去执行）
 
 ### 参考资料
-|来源|链接|
-|---|---|
-|IMWeb 前端博客|  [http://imweb.io/](http://imweb.io/)|
-|MDN      |      [https://developer.mozilla.org/en-US/](https://developer.mozilla.org/en-US/)|
-|前端精读周刊  |   [https://github.com/dt-fe/weekly](https://github.com/dt-fe/weekly/blob/master/55.%E7%B2%BE%E8%AF%BB%E3%80%8Aasync%20await%20%E6%98%AF%E6%8A%8A%E5%8F%8C%E5%88%83%E5%89%91%E3%80%8B.md)|
-|sessionstack| [https://blog.sessionstack.com/](https://blog.sessionstack.com/)|
-|v8 博客 fastasync(中文版)| [https://v8.js.cn/blog/fast-async/](https://v8.js.cn/blog/fast-async/)
-|Tasks, microtasks, queues and schedules| [https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
-|Secrets of the JavaScript Ninja| [https://livebook.manning.com/#!/book/secrets-of-the-javascript-ninja-second-edition/chapter-13/71](https://livebook.manning.com/#!/book/secrets-of-the-javascript-ninja-second-edition/chapter-13/71)
+
+| 来源                                    | 链接                                                                                                                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| IMWeb 前端博客                          | [http://imweb.io/](http://imweb.io/)                                                                                                                                                                   |
+| MDN                                     | [https://developer.mozilla.org/en-US/](https://developer.mozilla.org/en-US/)                                                                                                                           |
+| 前端精读周刊                            | [https://github.com/dt-fe/weekly](https://github.com/dt-fe/weekly/blob/master/55.%E7%B2%BE%E8%AF%BB%E3%80%8Aasync%20await%20%E6%98%AF%E6%8A%8A%E5%8F%8C%E5%88%83%E5%89%91%E3%80%8B.md)                 |
+| sessionstack                            | [https://blog.sessionstack.com/](https://blog.sessionstack.com/)                                                                                                                                       |
+| v8 博客 fastasync(中文版)               | [https://v8.js.cn/blog/fast-async/](https://v8.js.cn/blog/fast-async/)                                                                                                                                 |
+| Tasks, microtasks, queues and schedules | [https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)                                                         |
+| Secrets of the JavaScript Ninja         | [https://livebook.manning.com/#!/book/secrets-of-the-javascript-ninja-second-edition/chapter-13/71](https://livebook.manning.com/#!/book/secrets-of-the-javascript-ninja-second-edition/chapter-13/71) |
