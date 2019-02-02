@@ -4,6 +4,7 @@
 
 /Frontend/photoSlider
 
+/Algorithms/json
 # misc
 .DS_Store
 npm-debug.log*
